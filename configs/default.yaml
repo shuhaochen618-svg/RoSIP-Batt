@@ -1,0 +1,61 @@
+# MTL Battery Transformer — R19 Configuration
+# ===============================================
+
+# ─── Model Architecture (R19 Defaults) ───
+model:
+  d_model: 128          # Embedding dimension
+  n_layers: 2           # Transformer encoder depth
+  n_heads: 4            # Number of attention heads
+  dropout: 0.2          # Dropout rate
+  seq_len: 256          # Fixed resampled sequence length
+  input_channels: 3     # (V, I, T)
+  use_rope: true        # Rotary Position Embedding
+  use_dual_cls: true    # Dual CLS tokens for SOH & RUL
+  use_gate: true        # Per-dimension gated fusion
+  use_detach: true      # Gradient detach from SOH to RUL
+  use_conv_embed: true  # 1D Convolutional Embedding
+  use_extra_features: true # External features (cycle_idx, duration)
+  use_soh_in_rul: true  # SOH Prediction injected into RUL prediction head
+
+# ─── Training Hyperparameters ───
+training:
+  optimizer: adamw
+  lr: 1.0e-3            # Peak learning rate
+  weight_decay: 0.01
+  warmup_epochs: 10     # Linear warmup epochs
+  total_epochs: 300     # Maximum epochs
+  batch_size: 32
+  patience: 40          # Early stopping patience
+  min_epochs: 80        # Minimum training epochs before early stopping
+  ema_alpha: 0.9        # EMA smoothing for validation loss
+  grad_clip: 1.0        # Max gradient norm
+  s_soh_init: -1.0      # Initial log-variance for SOH (exp(1) ≈ 2.7x weight)
+  s_rul_init: 0.0       # Initial log-variance for RUL
+  s_clamp: [-5.0, 3.0]  # Uncertainty log-variance clamping range
+  soh_loss_scale: 500.0 # Scale factor for SOH loss to match RUL scale
+  rul_huber_delta: 30.0 # Huber loss delta parameter for linear RUL
+  rul_huber_scale: 0.01 # Huber loss scale factor for RUL
+
+# ─── Data Paths & Configurations ───
+data:
+  raw_data_root: "./data"
+  processed_data_root: "./processed_data"
+  split_ratios: [0.7, 0.1, 0.2]  # Train / Val / Test split
+  split_seed: 42
+  num_workers: 0
+
+  # Dataset EOL capacity fading thresholds
+  mit:
+    eol_threshold: 0.8
+  nasa:
+    eol_threshold: 0.7
+  calce:
+    eol_threshold: 0.8
+  hust:
+    eol_threshold: 0.8
+
+# ─── Logging & Checkpointing ───
+logging:
+  save_dir: "./results"
+  log_interval: 10
+  save_best: true
