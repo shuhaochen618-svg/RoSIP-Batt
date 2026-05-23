@@ -125,8 +125,12 @@ pip install -e .
 
 ## Dataset Setup
 
-For convenience and reproducibility, the preprocessed datasets can be downloaded from our Zenodo repository:
+For convenience and reproducibility, the preprocessed datasets can be downloaded from the public Zenodo repository compiled by Tan et al. (BatteryLife benchmark):
 * **Zenodo Repository**: [https://zenodo.org/records/19688272](https://zenodo.org/records/19688272) (Includes `CALCE.zip`, `NASA.zip`, `HUST.zip`, `Stanford.zip`, etc.)
+
+> [!NOTE]
+> If you utilize these datasets, please ensure you cite the original data creators as well as the **BatteryLife** benchmark publication:
+> * Tan, R., Hong, W., Tang, J., et al. "BatteryLife: A Comprehensive Dataset and Benchmark for Battery Life Prediction."
 
 Once downloaded, extract the files and place them under the `data/` folder following this structure:
 
