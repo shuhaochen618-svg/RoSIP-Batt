@@ -53,9 +53,9 @@ class MTLBatteryTransformer(nn.Module):
         use_dual_cls: Whether to use dual CLS tokens. Default True.
         use_gate: Whether to use Gated Fusion for SOH. Default True.
         use_detach: Whether to detach gradients flowing from SOH to RUL. Default True.
-        use_conv_embed: Whether to use 1D CNN Embedding. Default True (R19 default).
-        use_extra_features: Whether to use external physical features. Default True (R19 default).
-        use_soh_in_rul: Whether to inject predicted SOH into RUL head. Default True (R19 default).
+        use_conv_embed: Whether to use 1D CNN Embedding. Default True.
+        use_extra_features: Whether to use external physical features. Default True.
+        use_soh_in_rul: Whether to inject predicted SOH into RUL head. Default True.
     """
 
     def __init__(
@@ -72,9 +72,9 @@ class MTLBatteryTransformer(nn.Module):
         use_dual_cls: bool = True,
         use_gate: bool = True,
         use_detach: bool = True,
-        use_conv_embed: bool = True,       # Defaults to True for R19
-        use_extra_features: bool = True,   # Defaults to True for R19
-        use_soh_in_rul: bool = True,       # Defaults to True for R19
+        use_conv_embed: bool = True,       # Defaults to True
+        use_extra_features: bool = True,   # Defaults to True
+        use_soh_in_rul: bool = True,       # Defaults to True
     ):
         super().__init__()
         self.d_model = d_model

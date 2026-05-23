@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="RoSIP-Batt",
     version="1.0.0",
-    description="RoSIP-Batt: Rotary SOH-Injected Prior Battery Transformer (R19) for Joint SOH and RUL Prediction",
+    description="RoSIP-Batt: Rotary SOH-Injected Prior Battery Transformer for Joint SOH and RUL Prediction",
     long_description=open("README.md", encoding="utf-8").read() if open("README.md", encoding="utf-8") else "",
     long_description_content_type="text/markdown",
     author="Shuhao Chen",

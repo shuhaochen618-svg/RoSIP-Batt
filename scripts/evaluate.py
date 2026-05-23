@@ -1,5 +1,5 @@
 """
-Evaluation and Inference Script for the MTL Battery Transformer (R19).
+Evaluation and Inference Script for the MTL Battery Transformer (RoSIP-Batt).
 
 Loads a saved checkpoint, runs predictions on the dataset, reports performance metrics
 (SOH RMSE/MAE, RUL MAE/MAPE), and plots the results.
@@ -22,7 +22,7 @@ from models.mtl_model import MTLBatteryTransformer
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Evaluate MTL Battery Transformer (R19)")
+    parser = argparse.ArgumentParser(description="Evaluate MTL Battery Transformer (RoSIP-Batt)")
     parser.add_argument(
         "--checkpoint", 
         type=str, 
@@ -58,7 +58,7 @@ def plot_cell_predictions(cell_id, soh_true, soh_pred, rul_true, rul_pred, save_
     
     # 1. SOH comparison
     ax1.plot(cycles, soh_true, 'k-', label='True SOH', linewidth=2)
-    ax1.plot(cycles, soh_pred, 'r--', label='Predicted SOH (R19)', linewidth=2)
+    ax1.plot(cycles, soh_pred, 'r--', label='Predicted SOH (RoSIP-Batt)', linewidth=2)
     ax1.set_ylabel('State of Health (SOH)')
     ax1.set_title(f'Cell {cell_id} Joint Prediction Trajectory')
     ax1.legend(loc='lower left')
@@ -66,7 +66,7 @@ def plot_cell_predictions(cell_id, soh_true, soh_pred, rul_true, rul_pred, save_
     
     # 2. RUL comparison
     ax2.plot(cycles, rul_true, 'k-', label='True RUL', linewidth=2)
-    ax2.plot(cycles, rul_pred, 'b--', label='Predicted RUL (R19)', linewidth=2)
+    ax2.plot(cycles, rul_pred, 'b--', label='Predicted RUL (RoSIP-Batt)', linewidth=2)
     ax2.set_ylabel('Remaining Useful Life (RUL)')
     ax2.set_xlabel('Cycles')
     ax2.legend(loc='lower left')
@@ -86,7 +86,7 @@ def main():
         sys.exit(1)
 
     print("=" * 70)
-    print("      EVALUATING MTL BATTERY TRANSFORMER (R19)")
+    print("      EVALUATING MTL BATTERY TRANSFORMER (RoSIP-Batt)")
     print("=" * 70)
     print(f" Checkpoint: {args.checkpoint}")
     print(f" Device:     {args.device}")
@@ -94,7 +94,7 @@ def main():
 
     # ─── Load Checkpoint ───
     checkpoint = torch.load(args.checkpoint, map_location=args.device)
-    cfg_model = checkpoint["r19_config"]
+    cfg_model = checkpoint["model_config"]
     stats = checkpoint["norm_stats"]
     dataset_name = checkpoint["dataset"]
     model_state = checkpoint["model_state"]

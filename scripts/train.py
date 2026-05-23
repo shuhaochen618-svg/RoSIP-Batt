@@ -1,5 +1,5 @@
 """
-Main Training Entrypoint for the MTL Battery Transformer (R19).
+Main Training Entrypoint for the MTL Battery Transformer (RoSIP-Batt).
 
 Loads configurations, imports data, runs the joint SOH+RUL training loop
 using Homoscedastic Uncertainty-Weighted Multi-Task Loss, and saves the best model.
@@ -25,7 +25,7 @@ from models.losses import uncertainty_weighted_loss
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train MTL Battery Transformer (R19)")
+    parser = argparse.ArgumentParser(description="Train MTL Battery Transformer (RoSIP-Batt)")
     parser.add_argument(
         "--config", 
         type=str, 
@@ -91,7 +91,7 @@ def main():
         torch.cuda.manual_seed_all(seed)
 
     print("=" * 70)
-    print("        TRAINING MTL BATTERY TRANSFORMER (R19)")
+    print("        TRAINING MTL BATTERY TRANSFORMER (RoSIP-Batt)")
     print("=" * 70)
     print(f" Dataset:  {args.dataset}")
     print(f" Device:   {args.device}")
@@ -147,7 +147,7 @@ def main():
     val_loader = DataLoader(val_ds, batch_size=bs, shuffle=False, pin_memory=True) if val_ds else None
     test_loader = DataLoader(test_ds, batch_size=bs, shuffle=False, pin_memory=True)
 
-    # ─── Build R19 Model ───
+    # ─── Build Model ───
     model = MTLBatteryTransformer(
         d_model=cfg_model["d_model"],
         n_layers=cfg_model["n_layers"],
@@ -304,7 +304,7 @@ def main():
                 "model_state": best_state,
                 "norm_stats": stats,
                 "dataset": args.dataset,
-                "r19_config": cfg_model,
+                "model_config": cfg_model,
             }, ckpt_path)
         else:
             if epoch >= cfg_train["min_epochs"]:

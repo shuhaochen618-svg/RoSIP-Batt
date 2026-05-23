@@ -1,18 +1,18 @@
-# RoSIP-Batt (R19)
+# RoSIP-Batt
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Official PyTorch implementation of **RoSIP-Batt (Version R19)**, a deep multi-task learning architecture (**Ro**tary **S**OH-**I**njected **P**rior **Batt**ery Transformer) designed for **Joint State of Health (SOH) and Remaining Useful Life (RUL) Prediction** of lithium-ion batteries using partial charging segments.
+Official PyTorch implementation of **RoSIP-Batt**, a deep multi-task learning architecture (**Ro**tary **S**OH-**I**njected **P**rior **Batt**ery Transformer) designed for **Joint State of Health (SOH) and Remaining Useful Life (RUL) Prediction** of lithium-ion batteries using partial charging segments.
 
 ---
 
-## Key Highlights & Innovations (R19)
+## Key Highlights & Innovations
 
-R19 introduces several advanced neural architectures specifically designed to solve the challenges of battery degradation modeling:
+RoSIP-Batt introduces several advanced neural architectures specifically designed to solve the challenges of battery degradation modeling:
 
 1. **SOH Explicit Injection (SOH-to-RUL Prior Flow)**: 
-   SOH decline represents the physical loss of active lithium/materials, which dictates the future EOL cycle. R19 feeds the predicted $\hat{y}_{\text{SOH}}$ (with gradient detachment and scale centralization) directly into the RUL head as a physical prior constraint.
+   SOH decline represents the physical loss of active lithium/materials, which dictates the future EOL cycle. The model feeds the predicted $\hat{y}_{\text{SOH}}$ (with gradient detachment and scale centralization) directly into the RUL head as a physical prior constraint.
 2. **Rotary Position Embedding (RoPE)**:
    Replaces absolute position encodings with 1D Rotary Position Embeddings. RoPE preserves relative step relationships, which makes the model robust against random charging start voltages, variable charging lengths, and partial/truncated charging profiles.
 3. **Dual [CLS] Tokens & Gated Feature Fusion**:
@@ -31,10 +31,10 @@ open access/
 ├── requirements.txt
 ├── setup.py
 ├── configs/
-│   └── default.yaml         # Optimized R19 model hyperparameter configuration
+│   └── default.yaml         # Optimized model hyperparameter configuration
 ├── models/
 │   ├── __init__.py
-│   ├── mtl_model.py         # Main R19 MTL model framework
+│   ├── mtl_model.py         # Main MTL model framework
 │   ├── transformer.py       # Pre-LN Transformer Encoder with RoPE
 │   ├── rope.py              # Rotary Position Embedding cache & operator
 │   ├── heads.py             # Dedicated SOH (Sigmoid) and RUL (Softplus) heads
