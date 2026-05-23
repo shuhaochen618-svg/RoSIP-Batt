@@ -20,46 +20,7 @@ R19 introduces several advanced neural architectures specifically designed to so
 4. **Homoscedastic Uncertainty-Weighted Multi-Task Loss**:
    Uses learnable parameters $s_{\text{SOH}}$ and $s_{\text{RUL}}$ to dynamically balance the loss scales of SOH (bounded in $[0.7, 1.0]$) and RUL (unbounded scale).
 
----
 
-## Model Architecture Topology
-
-```mermaid
-graph TD
-    %% Input Data
-    Input["Charging Segment X<br>(B, 256, 3)<br>[Voltage V, Current I, Temp/Time T]"] --> ConvProj["1D Convolutional Embedding (Conv1d + BN + GELU)<br>(3 → d_model=128)"]
-    ConvProj --> PrependTokens["Prepend Dual CLS Tokens<br>[CLS_SOH, CLS_RUL, X_embed]<br>Shape: (B, 257+1, 128)"]
-    
-    %% Shared Transformer
-    PrependTokens --> TransEncoder["L-Layer Pre-LN Transformer Encoder (n_layers=2)<br>(Multi-Head Attention with 1D RoPE)"]
-    TransEncoder --> FinalLN["Final Layer Normalization"]
-    
-    %% Feature Extraction
-    FinalLN --> ExtractSOH["Extract [CLS_SOH] Representation z_soh (B, d)"]
-    FinalLN --> ExtractRUL["Extract [CLS_RUL] Representation z_rul (B, d)"]
-    
-    %% Gradient Detour and Gated Fusion
-    ExtractRUL --> DetachRUL["Gradient Detach: detach(z_rul)"]
-    ExtractSOH --> GateFusion["Per-Dimension Gated Fusion<br>z_soh_fused = z_soh + gate * detach(z_rul)"]
-    Gate["Gate weights g = Sigmoid(W * z_soh + b)<br>(Initial bias b=-3.0 to prevent early collapse)"] -.-> GateFusion
-    
-    %% Heads
-    GateFusion --> SOHHead["SOH Regressor (Linear-GELU-Linear-Sigmoid)"]
-    SOHHead --> SOHHat["Predicted SOH ŜOH ∈ (0, 1]"]
-    
-    %% SOH Injection to RUL
-    SOHHat --> DetachSOH["Gradient Detach & Centralize<br>soh_feat = (detach(ŜOH) - 0.8) / 0.1"]
-    
-    %% RUL Fusion & Prediction
-    ExtractRUL --> ConcatRUL["Feature Concatenation"]
-    ExtraFeats["External Physical Features<br>[cycle_idx, duration]"] --> ConcatRUL
-    DetachSOH --> ConcatRUL
-    
-    ConcatRUL --> RULHead["RUL Regressor (Linear-GELU-Linear-Softplus)"]
-    RULHead --> RULHat["Predicted RUL R̂UL ≥ 0"]
-```
-
----
 
 ## Directory Structure
 
