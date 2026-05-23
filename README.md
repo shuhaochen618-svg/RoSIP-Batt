@@ -125,7 +125,10 @@ pip install -e .
 
 ## Dataset Setup
 
-As this open-source release does not package data files directly, download public battery datasets and place them under the `data/` folder:
+For convenience and reproducibility, the preprocessed datasets can be downloaded from our Zenodo repository:
+* **Zenodo Repository**: [https://zenodo.org/records/19688272](https://zenodo.org/records/19688272) (Includes `CALCE.zip`, `NASA.zip`, `HUST.zip`, `Stanford.zip`, etc.)
+
+Once downloaded, extract the files and place them under the `data/` folder following this structure:
 
 1. **NASA PCoE Dataset**: Put `.pkl` files (e.g. `NASA_B0005.pkl`, etc.) under `data/NASA/`.
 2. **CALCE Dataset**: Put `.pkl` files (e.g. `CALCE_CS2_35.pkl`, etc.) under `data/CALCE/`.
