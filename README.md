@@ -43,7 +43,7 @@ open access/
 │   ├── __init__.py
 │   ├── dataset.py           # Battery Dataset class & oversampler
 │   ├── preprocessing.py     # Resampling & CC window extraction helpers
-│   ├── pkl_loader.py        # Dataset pickle files loader (NASA, CALCE, etc.)
+│   ├── pkl_loader.py        # Dataset pickle files loader (NASA, HUST, etc.)
 │   └── placeholder.txt      # Place datasets files in this directory
 └── scripts/
     ├── train.py             # Single-GPU/CPU training and validation runner
@@ -87,7 +87,7 @@ pip install -e .
 ## Dataset Setup
 
 For convenience and reproducibility, the preprocessed datasets can be downloaded from the public Zenodo repository compiled by Tan et al. (BatteryLife benchmark):
-* **Zenodo Repository**: [https://zenodo.org/records/19688272](https://zenodo.org/records/19688272) (Includes `CALCE.zip`, `NASA.zip`, `HUST.zip`, `Stanford.zip`, etc.)
+* **Zenodo Repository**: [https://zenodo.org/records/19688272](https://zenodo.org/records/19688272) (Includes `NASA.zip`, `HUST.zip`, `Stanford.zip`, etc.)
 
 > [!NOTE]
 > If you utilize these datasets, please ensure you cite the original data creators as well as the **BatteryLife** benchmark publication:
@@ -96,18 +96,14 @@ For convenience and reproducibility, the preprocessed datasets can be downloaded
 Once downloaded, extract the files and place them under the `data/` folder following this structure:
 
 1. **NASA PCoE Dataset**: Put `.pkl` files (e.g. `NASA_B0005.pkl`, etc.) under `data/NASA/`.
-2. **CALCE Dataset**: Put `.pkl` files (e.g. `CALCE_CS2_35.pkl`, etc.) under `data/CALCE/`.
-3. **MIT-Stanford Dataset**: Put `.pkl` files under `data/Stanford/`.
-4. **HUST Dataset**: Put `.pkl` files under `data/HUST/`.
+2. **MIT-Stanford Dataset**: Put `.pkl` files under `data/Stanford/`.
+3. **HUST Dataset**: Put `.pkl` files under `data/HUST/`.
 
 File structures:
 ```
 data/
 ├── NASA/
 │   ├── NASA_B0005.pkl
-│   └── ...
-├── CALCE/
-│   ├── CALCE_CS2_35.pkl
 │   └── ...
 └── Stanford/
     └── ...

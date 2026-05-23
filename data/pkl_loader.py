@@ -3,7 +3,7 @@ Unified .pkl Data Loader for the MTL Battery Transformer.
 
 Reads the standardised BatteryML-format .pkl files from a dataset root directory.
 Supports:
-  - Missing temperature channel (CALCE / Stanford) → zero-filled
+  - Missing temperature channel (Stanford) → zero-filled
   - Variable-length voltage series → resampled to fixed T=256
   - SOH & RUL label computation with configurable EOL threshold
   - Cell-level train/val/test splitting
@@ -25,22 +25,16 @@ DATASET_CONFIGS = {
         "dataset_id": 0,
         "eol_threshold": 0.7,   # NASA convention: 30% capacity fade
     },
-    "CALCE": {
-        "dir_name": "CALCE",
-        "cells": ["CALCE_CS2_35.pkl", "CALCE_CS2_36.pkl", "CALCE_CS2_37.pkl", "CALCE_CS2_38.pkl"],
-        "dataset_id": 1,
-        "eol_threshold": 0.8,   # CALCE convention: 20% capacity fade
-    },
     "Stanford": {
         "dir_name": "Stanford",
         "cells": None,          # Use all .pkl files in the folder
-        "dataset_id": 2,
+        "dataset_id": 1,
         "eol_threshold": 0.8,
     },
     "HUST": {
         "dir_name": "HUST",
         "cells": None,          # Use all .pkl files in the folder
-        "dataset_id": 3,
+        "dataset_id": 2,
         "eol_threshold": 0.8,
     },
 }
@@ -192,7 +186,7 @@ def load_dataset(
     """Load all cells for a given dataset name.
 
     Args:
-        name: One of 'NASA', 'CALCE', 'Stanford', 'HUST'.
+        name: One of 'NASA', 'Stanford', 'HUST'.
         data_root: Path containing dataset subfolders.
         seq_len: Resampling sequence length.
 

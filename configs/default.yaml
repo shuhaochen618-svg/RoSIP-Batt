@@ -49,8 +49,6 @@ data:
     eol_threshold: 0.8
   nasa:
     eol_threshold: 0.7
-  calce:
-    eol_threshold: 0.8
   hust:
     eol_threshold: 0.8
 

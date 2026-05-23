@@ -36,7 +36,7 @@ def parse_args():
         "--dataset", 
         type=str, 
         default="NASA", 
-        choices=["NASA", "CALCE", "Stanford", "HUST"],
+        choices=["NASA", "Stanford", "HUST"],
         help="Target dataset to train on"
     )
     parser.add_argument(

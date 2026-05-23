@@ -4,9 +4,6 @@
 #   NASA/
 #     NASA_B0005.pkl
 #     ...
-#   CALCE/
-#     CALCE_CS2_35.pkl
-#     ...
 #   Stanford/
 #     Stanford_Nova_Regular_191.pkl
 #     ...

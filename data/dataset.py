@@ -15,7 +15,7 @@ class BatteryCycleDataset(Dataset):
         X:    (T, 3)  — resampled (V, I, T) time series
         soh:  scalar   — SOH = Q_k / Q_0
         rul:  scalar   — RUL = k_eol - k
-        dataset_id: int — 0=MIT, 1=NASA, 2=CALCE
+        dataset_id: int — 0=MIT, 1=NASA, 2=Stanford, 3=HUST
         cell_id: str
         cycle_idx: int
         duration: float
