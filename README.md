@@ -56,20 +56,6 @@ open access/
 
 ---
 
-## Mathematical Formulation
-
-### 1. Homoscedastic Uncertainty Weighting
-For joint SOH and RUL regression, we define the learning objective using a Bayesian interpretation of multi-task loss:
-$$\mathcal{L}(\theta, s_{\text{SOH}}, s_{\text{RUL}}) = \frac{1}{2} \exp(-s_{\text{SOH}}) \mathcal{L}_{\text{SOH}} + \frac{1}{2} \exp(-s_{\text{RUL}}) \mathcal{L}_{\text{RUL}} + \frac{1}{2} s_{\text{SOH}} + \frac{1}{2} s_{\text{RUL}}$$
-where $s_{\text{SOH}} = \log(\sigma^2_{\text{SOH}})$ and $s_{\text{RUL}} = \log(\sigma^2_{\text{RUL}})$ are learnable parameters acting as adaptive task weights.
-
-### 2. SOH Injection
-To provide RUL head with SOH physical state constraint without interfering with SOH gradient paths:
-$$\text{soh\_feat} = \frac{\text{detach}(\hat{y}_{\text{SOH}}) - 0.8}{0.1}$$
-$$\hat{y}_{\text{RUL}} = \text{Softplus}\left(\mathbf{W}_2 \cdot \text{GELU}(\mathbf{W}_1 \cdot [\mathbf{z}_{\text{RUL}}; \mathbf{x}_{\text{extra}}; \text{soh\_feat}] + \mathbf{b}_1) + \mathbf{b}_2\right)$$
-
----
-
 ## Installation
 
 Ensure you have Python 3.8+ and PyTorch installed.
