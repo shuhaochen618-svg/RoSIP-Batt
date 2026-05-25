@@ -5,6 +5,10 @@
 
 Official PyTorch implementation of **RoSIP-Batt**, a deep multi-task learning architecture (**Ro**tary **S**OH-**I**njected **P**rior **Batt**ery Transformer) designed for **Joint State of Health (SOH) and Remaining Useful Life (RUL) Prediction** of lithium-ion batteries using partial charging segments.
 
+<p align="center">
+  <img src="FIGURE1.png" alt="Graphical Abstract – RoSIP-Batt Architecture Overview" width="100%">
+</p>
+
 ---
 
 ## Key Highlights & Innovations
